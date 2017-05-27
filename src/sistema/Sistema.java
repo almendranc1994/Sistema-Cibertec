@@ -5,6 +5,8 @@
  */
 package sistema;
 
+import Controlador.SistemaControlador;
+
 /**
  *
  * @author alulab14
@@ -15,6 +17,8 @@ public class Sistema {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        SistemaControlador S = new SistemaControlador();
+        
         // TODO code application logic here
     }
     
