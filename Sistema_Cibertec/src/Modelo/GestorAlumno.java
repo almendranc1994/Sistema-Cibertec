@@ -12,10 +12,12 @@ import java.util.ArrayList;
  * @author alulab14
  */
 public class GestorAlumno {
-    private ArrayList <Alumno> Alumnos;
+    private ArrayList <Alumno> alumnos;
+    private ArrayList <Alumno> alumnosAux;
     
     public GestorAlumno(){
-        Alumnos = new ArrayList<Alumno>();
+        alumnos = new ArrayList<Alumno>();
+        alumnosAux = new ArrayList<Alumno>();
         leerAlumnos();        
     }
     
@@ -25,7 +27,12 @@ public class GestorAlumno {
     
     public void insertarAlumno(String nombres, String ape_pat, String ape_mat){
         Alumno A = new Alumno(nombres, ape_pat, ape_mat);
-        Alumnos.add(A);
+        alumnos.add(A);
+    }
+    
+    public void insertarAlumnoAux(String nombres, String ape_pat, String ape_mat){
+        Alumno A = new Alumno(nombres, ape_pat, ape_mat);
+        alumnosAux.add(A);
     }
     
     private void guardarAlumno(){
@@ -34,7 +41,10 @@ public class GestorAlumno {
     
     private void leerAlumnos(){
         //LEER ARCHIVO
-    }
+    }        
     
+    public ArrayList<Alumno> obtenerListaAux(){
+        return alumnosAux;
+    }
     
 }

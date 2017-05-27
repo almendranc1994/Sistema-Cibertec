@@ -5,7 +5,9 @@
  */
 package Controlador;
 
+import Modelo.Alumno;
 import Modelo.GestorAlumno;
+import java.util.ArrayList;
 
 /**
  *
@@ -20,6 +22,15 @@ public class SistemaControlador {
     
     public void insertarAlumno(String nombres, String ape_pat, String ape_mat){
         gestorAlumno.insertarAlumno(nombres, ape_pat, ape_mat);
+        insertarAlumnoAux(nombres, ape_pat, ape_mat);
+    }       
+    
+    public void insertarAlumnoAux(String nombres, String ape_pat, String ape_mat){
+        gestorAlumno.insertarAlumnoAux(nombres, ape_pat, ape_mat);
+    }  
+    
+    public ArrayList<Alumno> obtenerListaAux(){
+        return gestorAlumno.obtenerListaAux();
     }
     
 }

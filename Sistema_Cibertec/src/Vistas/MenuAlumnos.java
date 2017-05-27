@@ -6,23 +6,31 @@
 package Vistas;
 
 import Controlador.SistemaControlador;
+import Modelo.*;
 import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author alulab14
  */
 public class MenuAlumnos extends javax.swing.JFrame {
-
+    
     /**
      * Creates new form MenuAlumnos
      */
-    SistemaControlador controlador;
+    SistemaControlador controlador;    
     
     public MenuAlumnos(SistemaControlador controlador) {
         initComponents();
         this.controlador = controlador;
     }        
+    
+    public void actualizarTabla(){
+        DefaultTableModel model = (DefaultTableModel) tablaAlumnos.getModel();
+        //ArrayList<Alumno> lista = new ArrayList<>();
+        //ArrayList<Alumno> aux = controlador
+    }
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -34,13 +42,13 @@ public class MenuAlumnos extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        tablaAlumnos = new javax.swing.JTable();
+        botonNuevoAlumno = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1080, 457));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablaAlumnos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -48,12 +56,12 @@ public class MenuAlumnos extends javax.swing.JFrame {
                 "ID", "Nombres", "A. Paterno", "A.Materno"
             }
         ));
-        jScrollPane2.setViewportView(jTable1);
+        jScrollPane2.setViewportView(tablaAlumnos);
 
-        jButton1.setText("NUEVO ALUMNO");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        botonNuevoAlumno.setText("NUEVO ALUMNO");
+        botonNuevoAlumno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                botonNuevoAlumnoActionPerformed(evt);
             }
         });
 
@@ -68,7 +76,7 @@ public class MenuAlumnos extends javax.swing.JFrame {
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 609, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(88, 88, 88)
-                        .addComponent(jButton1)))
+                        .addComponent(botonNuevoAlumno)))
                 .addContainerGap(51, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -77,17 +85,17 @@ public class MenuAlumnos extends javax.swing.JFrame {
                 .addGap(52, 52, 52)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(49, 49, 49)
-                .addComponent(jButton1)
+                .addComponent(botonNuevoAlumno)
                 .addContainerGap(32, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void botonNuevoAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonNuevoAlumnoActionPerformed
         final insertarAlumno ventana = new insertarAlumno(controlador);
-        ventana.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+        ventana.setVisible(true);                
+    }//GEN-LAST:event_botonNuevoAlumnoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -120,14 +128,14 @@ public class MenuAlumnos extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 SistemaControlador S = new SistemaControlador();
-                new MenuAlumnos(S).setVisible(true);
+                new MenuAlumnos(S).setVisible(true);                
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton botonNuevoAlumno;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tablaAlumnos;
     // End of variables declaration//GEN-END:variables
 }
