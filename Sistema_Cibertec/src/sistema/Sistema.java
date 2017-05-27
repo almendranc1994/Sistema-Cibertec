@@ -19,7 +19,8 @@ public class Sistema {
      */
     public static void main(String[] args) {
         SistemaControlador S = new SistemaControlador();
-                
+        new MenuAlumnos(S).setVisible(true);
+        
         // TODO code application logic here
     }
     
