@@ -5,7 +5,8 @@
  */
 package sistema;
 
-import Controlador.SistemaControlador;
+import Controlador.*;
+import Vistas.*;
 
 /**
  *
@@ -18,6 +19,7 @@ public class Sistema {
      */
     public static void main(String[] args) {
         SistemaControlador S = new SistemaControlador();
+        
         
         // TODO code application logic here
     }

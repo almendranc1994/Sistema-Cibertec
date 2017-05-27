@@ -5,6 +5,8 @@
  */
 package Vistas;
 
+import Controlador.SistemaControlador;
+
 /**
  *
  * @author alulab14
@@ -14,9 +16,14 @@ public class insertarAlumno extends javax.swing.JFrame {
     /**
      * Creates new form insertarAlumno
      */
-    public insertarAlumno() {
+    SistemaControlador controlador;
+    
+    public insertarAlumno(SistemaControlador controlador) {
         initComponents();
+        this.controlador = controlador;
     }
+
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -117,6 +124,7 @@ public class insertarAlumno extends javax.swing.JFrame {
         String ape_pat = textFieldApePat.getText();
         String ape_mat = textFieldApeMat.getText();
         
+        controlador.insertarAlumno(nombres, ape_pat, ape_mat);
     }//GEN-LAST:event_botonInsertarAlumnoActionPerformed
 
     /**
@@ -149,7 +157,8 @@ public class insertarAlumno extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new insertarAlumno().setVisible(true);
+                SistemaControlador S = new SistemaControlador();
+                new insertarAlumno(S).setVisible(true);
             }
         });
     }

@@ -19,7 +19,7 @@ public class SistemaControlador {
     }
     
     public void insertarAlumno(String nombres, String ape_pat, String ape_mat){
-        
+        gestorAlumno.insertarAlumno(nombres, ape_pat, ape_mat);
     }
     
 }
