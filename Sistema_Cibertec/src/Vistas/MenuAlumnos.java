@@ -26,10 +26,17 @@ public class MenuAlumnos extends javax.swing.JFrame {
         this.controlador = controlador;
     }        
     
-    public void actualizarTabla(){
+    public void actualizarTabla(){        
         DefaultTableModel model = (DefaultTableModel) tablaAlumnos.getModel();
-        //ArrayList<Alumno> lista = new ArrayList<>();
-        //ArrayList<Alumno> aux = controlador
+        model.setRowCount(0);
+        ArrayList<Alumno> lista = controlador.obtenerListaAux();
+        Object rowData[] = new Object[3];
+        for(int i=0; i< lista.size(); i++){
+            rowData[0] = lista.get(i).getNombres();
+            rowData[1] = lista.get(i).getApe_pat();
+            rowData[2] = lista.get(i).getApe_mat();
+            model.addRow(rowData);
+        }
     }
     
     /**
@@ -44,6 +51,9 @@ public class MenuAlumnos extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         tablaAlumnos = new javax.swing.JTable();
         botonNuevoAlumno = new javax.swing.JButton();
+        botonActualizarTabla = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        botonModificar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1080, 457));
@@ -53,7 +63,7 @@ public class MenuAlumnos extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "Nombres", "A. Paterno", "A.Materno"
+                "Nombres", "A. Paterno", "A.Materno"
             }
         ));
         jScrollPane2.setViewportView(tablaAlumnos);
@@ -65,27 +75,57 @@ public class MenuAlumnos extends javax.swing.JFrame {
             }
         });
 
+        botonActualizarTabla.setText("ACTUALIZA TABLA");
+        botonActualizarTabla.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonActualizarTablaActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
+        jLabel1.setText("MANTENIMIENTO DE ALUMNOS");
+
+        botonModificar.setText("MODIFICAR");
+        botonModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonModificarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(88, 88, 88)
+                .addComponent(botonNuevoAlumno)
+                .addGap(18, 18, 18)
+                .addComponent(botonActualizarTabla)
+                .addGap(18, 18, 18)
+                .addComponent(botonModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(56, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(57, 57, 57)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 609, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(88, 88, 88)
-                        .addComponent(botonNuevoAlumno)))
-                .addContainerGap(51, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 609, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(52, 52, 52))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(226, 226, 226))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(52, 52, 52)
+                .addGap(28, 28, 28)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(49, 49, 49)
-                .addComponent(botonNuevoAlumno)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(botonNuevoAlumno)
+                    .addComponent(botonActualizarTabla)
+                    .addComponent(botonModificar))
                 .addContainerGap(32, Short.MAX_VALUE))
         );
 
@@ -93,9 +133,22 @@ public class MenuAlumnos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonNuevoAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonNuevoAlumnoActionPerformed
+        actualizarTabla();
         final insertarAlumno ventana = new insertarAlumno(controlador);
-        ventana.setVisible(true);                
+        ventana.setVisible(true);      
+        //actualizarTabla();
     }//GEN-LAST:event_botonNuevoAlumnoActionPerformed
+
+    private void botonActualizarTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonActualizarTablaActionPerformed
+        actualizarTabla();
+    }//GEN-LAST:event_botonActualizarTablaActionPerformed
+
+    private void botonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonModificarActionPerformed
+        int seleccion = tablaAlumnos.getSelectedRow();
+        if(seleccion >= 0){
+            
+        }
+    }//GEN-LAST:event_botonModificarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -128,13 +181,16 @@ public class MenuAlumnos extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 SistemaControlador S = new SistemaControlador();
-                new MenuAlumnos(S).setVisible(true);                
+                new MenuAlumnos(S).setVisible(true); 
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton botonActualizarTabla;
+    private javax.swing.JButton botonModificar;
     private javax.swing.JButton botonNuevoAlumno;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable tablaAlumnos;
     // End of variables declaration//GEN-END:variables

@@ -42,6 +42,7 @@ public class insertarAlumno extends javax.swing.JFrame {
         textFieldNombres = new javax.swing.JTextField();
         textFieldApePat = new javax.swing.JTextField();
         textFieldApeMat = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -65,6 +66,8 @@ public class insertarAlumno extends javax.swing.JFrame {
             }
         });
 
+        jLabel4.setText("FORMARIO DE INSERCIÓN");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -79,7 +82,7 @@ public class insertarAlumno extends javax.swing.JFrame {
                         .addComponent(jLabel1)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
                         .addComponent(botonCancelar)
                         .addGap(66, 66, 66))
                     .addGroup(layout.createSequentialGroup()
@@ -89,11 +92,17 @@ public class insertarAlumno extends javax.swing.JFrame {
                             .addComponent(textFieldApePat)
                             .addComponent(textFieldApeMat, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(73, 73, 73))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(123, 123, 123)
+                .addGap(51, 51, 51)
+                .addComponent(jLabel4)
+                .addGap(58, 58, 58)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(textFieldNombres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -120,11 +129,12 @@ public class insertarAlumno extends javax.swing.JFrame {
     }//GEN-LAST:event_botonCancelarActionPerformed
 
     private void botonInsertarAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonInsertarAlumnoActionPerformed
-        String nombres = textFieldNombres.getText();
-        String ape_pat = textFieldApePat.getText();
-        String ape_mat = textFieldApeMat.getText();
+        String nombres = textFieldNombres.getText().toUpperCase();
+        String ape_pat = textFieldApePat.getText().toUpperCase();
+        String ape_mat = textFieldApeMat.getText().toUpperCase();
         
         controlador.insertarAlumno(nombres, ape_pat, ape_mat);
+        //new MenuAlumnos(controlador).actualizarTabla();
     }//GEN-LAST:event_botonInsertarAlumnoActionPerformed
 
     /**
@@ -159,6 +169,7 @@ public class insertarAlumno extends javax.swing.JFrame {
             public void run() {
                 SistemaControlador S = new SistemaControlador();
                 new insertarAlumno(S).setVisible(true);
+                
             }
         });
     }
@@ -169,6 +180,7 @@ public class insertarAlumno extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JTextField textFieldApeMat;
     private javax.swing.JTextField textFieldApePat;
     private javax.swing.JTextField textFieldNombres;

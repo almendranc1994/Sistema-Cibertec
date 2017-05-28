@@ -27,12 +27,12 @@ public class GestorAlumno {
     
     public void insertarAlumno(String nombres, String ape_pat, String ape_mat){
         Alumno A = new Alumno(nombres, ape_pat, ape_mat);
-        alumnos.add(A);
+        getAlumnos().add(A);
     }
     
     public void insertarAlumnoAux(String nombres, String ape_pat, String ape_mat){
         Alumno A = new Alumno(nombres, ape_pat, ape_mat);
-        alumnosAux.add(A);
+        getAlumnosAux().add(A);
     }
     
     private void guardarAlumno(){
@@ -42,9 +42,22 @@ public class GestorAlumno {
     private void leerAlumnos(){
         //LEER ARCHIVO
     }        
-    
-    public ArrayList<Alumno> obtenerListaAux(){
+
+    public ArrayList <Alumno> getAlumnos() {
+        return alumnos;
+    }
+
+    public void setAlumnos(ArrayList <Alumno> alumnos) {
+        this.alumnos = alumnos;
+    }
+
+    public ArrayList <Alumno> getAlumnosAux() {
         return alumnosAux;
     }
+
+    public void setAlumnosAux(ArrayList <Alumno> alumnosAux) {
+        this.alumnosAux = alumnosAux;
+    }
+    
     
 }

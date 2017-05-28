@@ -30,7 +30,7 @@ public class SistemaControlador {
     }  
     
     public ArrayList<Alumno> obtenerListaAux(){
-        return gestorAlumno.obtenerListaAux();
+        return gestorAlumno.getAlumnosAux();
     }
     
 }
