@@ -7,6 +7,8 @@ package sistema;
 
 import Controlador.*;
 import Vistas.*;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 /**
  *
@@ -16,8 +18,9 @@ public class Sistema {
 
     /**
      * @param args the command line arguments
+     * @throws java.io.FileNotFoundException
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         SistemaControlador S = new SistemaControlador();
         new MenuAlumnos(S).setVisible(true);
         

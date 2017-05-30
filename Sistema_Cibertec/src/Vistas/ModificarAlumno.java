@@ -5,17 +5,24 @@
  */
 package Vistas;
 
+import Controlador.SistemaControlador;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Almendra
  */
 public class ModificarAlumno extends javax.swing.JFrame {
 
-    /**
-     * Creates new form ModificarAlumno
-     */
-    public ModificarAlumno() {
+    SistemaControlador controlador;
+    
+    public ModificarAlumno(SistemaControlador controlador) {
         initComponents();
+        this.controlador = controlador;
     }
 
     /**
@@ -32,8 +39,11 @@ public class ModificarAlumno extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        fieldNombre = new javax.swing.JTextField();
+        fieldApelliPat = new javax.swing.JTextField();
+        fieldApelliMat = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -43,11 +53,15 @@ public class ModificarAlumno extends javax.swing.JFrame {
 
         jLabel3.setText("Apellido Materno:");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        fieldNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                fieldNombreActionPerformed(evt);
             }
         });
+
+        jButton1.setText("MODIFICAR");
+
+        jButton2.setText("CANCELAR");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -56,39 +70,56 @@ public class ModificarAlumno extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(49, 49, 49)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING))
-                        .addGap(32, 32, 32)
+                        .addComponent(jButton1)
+                        .addGap(54, 54, 54)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel2)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING))
+                            .addComponent(jLabel3))
+                        .addGap(30, 30, 30)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField1)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE))))
-                .addContainerGap(49, Short.MAX_VALUE))
+                            .addComponent(fieldNombre)
+                            .addComponent(fieldApelliPat)
+                            .addComponent(fieldApelliMat, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE))))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(111, 111, 111)
+                .addGap(139, 139, 139)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(fieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
-                .addGap(32, 32, 32)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(fieldApelliPat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
-                .addGap(31, 31, 31)
-                .addComponent(jLabel3)
-                .addContainerGap(147, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(fieldApelliMat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2))
+                .addGap(46, 46, 46))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    private void fieldNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldNombreActionPerformed
+//        DefaultTableModel model = (DefaultTableModel) tablaAlumnos.getModel();
+//        int seleccion = tablaAlumnos.getSelectedRow();
+//        if(seleccion >= 0){
+//            final ModificarAlumno ventana = new ModificarAlumno(controlador);
+//            fieldNombre.setText(model.getValueAt(seleccion, 0).toString());
+//        }
+    }//GEN-LAST:event_fieldNombreActionPerformed
 
     /**
      * @param args the command line arguments
@@ -120,18 +151,27 @@ public class ModificarAlumno extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ModificarAlumno().setVisible(true);
+                SistemaControlador S;
+                try {
+                    S = new SistemaControlador();
+                    new ModificarAlumno(S).setVisible(true);
+                } catch (IOException ex) {
+                    Logger.getLogger(ModificarAlumno.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField fieldApelliMat;
+    private javax.swing.JTextField fieldApelliPat;
+    private javax.swing.JTextField fieldNombre;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JPopupMenu jPopupMenu2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
 }

@@ -7,6 +7,8 @@ package Controlador;
 
 import Modelo.Alumno;
 import Modelo.GestorAlumno;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -16,21 +18,29 @@ import java.util.ArrayList;
 public class SistemaControlador {
     GestorAlumno gestorAlumno;
 
-    public SistemaControlador() {
+    public SistemaControlador() throws IOException {
         gestorAlumno = new GestorAlumno();
     }
     
-    public void insertarAlumno(String nombres, String ape_pat, String ape_mat){
-        gestorAlumno.insertarAlumno(nombres, ape_pat, ape_mat);
-        insertarAlumnoAux(nombres, ape_pat, ape_mat);
+    public void insertarAlumno(int codigo, String nombres, String ape_pat, String ape_mat, int dia, int mes, int anho){
+        gestorAlumno.insertarAlumno(codigo, nombres, ape_pat, ape_mat, dia, mes, anho);
+        insertarAlumnoAux(codigo, nombres, ape_pat, ape_mat, dia, mes, anho);
     }       
     
-    public void insertarAlumnoAux(String nombres, String ape_pat, String ape_mat){
-        gestorAlumno.insertarAlumnoAux(nombres, ape_pat, ape_mat);
+    public void insertarAlumnoAux(int codigo, String nombres, String ape_pat, String ape_mat, int dia, int mes, int anho){
+        gestorAlumno.insertarAlumnoAux(codigo, nombres, ape_pat, ape_mat, dia, mes, anho);
     }  
     
     public ArrayList<Alumno> obtenerListaAux(){
         return gestorAlumno.getAlumnosAux();
+    }
+    
+    private void guardarAlumnos() throws IOException{
+        //gestorAlumno;
+    }
+    
+    public Alumno buscarAlumno(int codigo){
+        return gestorAlumno.buscarAlumno(codigo);
     }
     
 }

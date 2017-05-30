@@ -7,8 +7,13 @@ package Vistas;
 
 import Controlador.SistemaControlador;
 import Modelo.*;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -30,11 +35,12 @@ public class MenuAlumnos extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) tablaAlumnos.getModel();
         model.setRowCount(0);
         ArrayList<Alumno> lista = controlador.obtenerListaAux();
-        Object rowData[] = new Object[3];
+        Object rowData[] = new Object[4];
         for(int i=0; i< lista.size(); i++){
-            rowData[0] = lista.get(i).getNombres();
-            rowData[1] = lista.get(i).getApe_pat();
-            rowData[2] = lista.get(i).getApe_mat();
+            rowData[0] = lista.get(i).getCodigo();
+            rowData[1] = lista.get(i).getNombres();
+            rowData[2] = lista.get(i).getApe_pat();
+            rowData[3] = lista.get(i).getApe_mat();
             model.addRow(rowData);
         }
     }
@@ -54,6 +60,8 @@ public class MenuAlumnos extends javax.swing.JFrame {
         botonActualizarTabla = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         botonModificar = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1080, 457));
@@ -63,9 +71,22 @@ public class MenuAlumnos extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Nombres", "A. Paterno", "A.Materno"
+                "Coigo", "Nombres", "A. Paterno", "A.Materno"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, true, true, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tablaAlumnos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaAlumnosMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tablaAlumnos);
 
         botonNuevoAlumno.setText("NUEVO ALUMNO");
@@ -92,27 +113,39 @@ public class MenuAlumnos extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("ELIMINAR");
+
+        jButton2.setText("SALIR");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(88, 88, 88)
-                .addComponent(botonNuevoAlumno)
-                .addGap(18, 18, 18)
-                .addComponent(botonActualizarTabla)
-                .addGap(18, 18, 18)
-                .addComponent(botonModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(56, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 609, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(52, 52, 52))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(226, 226, 226))))
+                        .addGap(226, 226, 226))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(botonNuevoAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(botonActualizarTabla, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(botonModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 609, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(52, 52, 52))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -125,7 +158,9 @@ public class MenuAlumnos extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botonNuevoAlumno)
                     .addComponent(botonActualizarTabla)
-                    .addComponent(botonModificar))
+                    .addComponent(botonModificar)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2))
                 .addContainerGap(32, Short.MAX_VALUE))
         );
 
@@ -144,11 +179,26 @@ public class MenuAlumnos extends javax.swing.JFrame {
     }//GEN-LAST:event_botonActualizarTablaActionPerformed
 
     private void botonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonModificarActionPerformed
-        int seleccion = tablaAlumnos.getSelectedRow();
-        if(seleccion >= 0){
+        DefaultTableModel model = (DefaultTableModel) tablaAlumnos.getModel();
+        int selectedRow = tablaAlumnos.getSelectedRow();
+        if(selectedRow >= 0){
+            int codigo = Integer.valueOf(model.getValueAt(selectedRow, 0).toString());
+            Alumno A = controlador.buscarAlumno(codigo);
+            final ModificarAlumno ventana = new ModificarAlumno(controlador);
             
         }
     }//GEN-LAST:event_botonModificarActionPerformed
+
+    private void tablaAlumnosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaAlumnosMouseClicked
+        int index = tablaAlumnos.getSelectedRow();
+        TableModel model = tablaAlumnos.getModel();
+        String nombres = model.getValueAt(index, 0).toString();
+        //Alumno A = buscarAlumno(nombres);
+    }//GEN-LAST:event_tablaAlumnosMouseClicked
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        //controlador        
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -180,8 +230,13 @@ public class MenuAlumnos extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                SistemaControlador S = new SistemaControlador();
-                new MenuAlumnos(S).setVisible(true); 
+                SistemaControlador S;
+                try {
+                    S = new SistemaControlador();
+                    new MenuAlumnos(S).setVisible(true); 
+                } catch (IOException ex) {
+                    Logger.getLogger(MenuAlumnos.class.getName()).log(Level.SEVERE, null, ex);
+                }               
             }
         });
     }
@@ -190,6 +245,8 @@ public class MenuAlumnos extends javax.swing.JFrame {
     private javax.swing.JButton botonActualizarTabla;
     private javax.swing.JButton botonModificar;
     private javax.swing.JButton botonNuevoAlumno;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable tablaAlumnos;

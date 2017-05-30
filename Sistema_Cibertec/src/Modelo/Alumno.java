@@ -14,19 +14,26 @@ public class Alumno {
     private String ape_pat;
     private String ape_mat;
     private String nombres;
+    private int diaNacimiento;
+    private int mesNacimiento;
+    private int anhoNacimiento;
     private Carrera carrera;
     
-    public Alumno(String ape_pat, String ape_mat, String nombres){
+    public Alumno(int codigo, String ape_pat, String ape_mat, String nombres, int dia, int mes, int anho){        
+        setCodigo(codigo);
         setApe_mat(ape_mat);
         setApe_pat(ape_pat);
         setNombres(nombres);
+        setDiaNacimiento(dia);
+        setMesNacimiento(mes);
+        setAnhoNacimiento(anho);
     }
     
     public int getCodigo() {
         return codigo;
     }
 
-    public void setCodigo(int codigo) {
+    public void setCodigo(int codigo) {        
         this.codigo = codigo;
     }
 
@@ -54,4 +61,32 @@ public class Alumno {
         this.nombres = nombres;
     }
 
+    public int getDiaNacimiento() {
+        return diaNacimiento;
+    }
+
+    public void setDiaNacimiento(int diaNacimiento) {
+        this.diaNacimiento = diaNacimiento;
+    }
+
+    public int getMesNacimiento() {
+        return mesNacimiento;
+    }
+
+    public void setMesNacimiento(int mesNacimiento) {
+        this.mesNacimiento = mesNacimiento;
+    }
+
+    public int getAnhoNacimiento() {
+        return anhoNacimiento;
+    }
+
+    public void setAnhoNacimiento(int anhoNacimiento) {
+        this.anhoNacimiento = anhoNacimiento;
+    }
+    
+    public String obtenerLineaDeli(){
+        return getCodigo() + "," + getNombres() + "," + getApe_pat() + "," + getApe_mat() + "," + getDiaNacimiento() + "," + getMesNacimiento() + "," + getAnhoNacimiento();
+    }
+    
 }
